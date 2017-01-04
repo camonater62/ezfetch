@@ -17,12 +17,10 @@ SHELL="$(echo $SHELL)"
 #output p1
 echo "
 ezfetch v1.2
--------------------------
-
+-------------------------"
 if [ -e "/etc/manjaro-release" ] 
 then
-	echo -e "\e[32m
-██████████████  ██████
+	echo -e "\e[32m██████████████  ██████
 ██████████████  ██████
 ██████████████  ██████
 ██████		██████
@@ -49,7 +47,7 @@ then
 ████	  ████
 ████	  ████
 
-Distro: ARch
+Distro: Arch
 "
 else
 echo -e "\e[0;31m
@@ -60,10 +58,10 @@ echo -e "\e[0;31m
 Distro:		Unknown
 "
 fi
-
 #output p2
 echo "Kernel:         $KERNEL
 Hostname:       $HOST
 Window Manager: $wm
 Shell:          $SHELL"
-echo -e "\e[0m"
+
+echo -e "\e[0m ;^)"
