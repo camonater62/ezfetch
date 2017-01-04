@@ -1,7 +1,7 @@
 EZFetch is an incredbily simple infogathering script for screenshots on your UNIX system!
 
 INSTALLATION
-git clone https://www.github.com/LonelyPyxel/ezfetch.git
+git clone https://www.github.com/camonater62/ezfetch.git
 cd ezfetch/
 chmod +x ezfetch.sh
 sudo cp ezfetch.sh /usr/bin
@@ -20,5 +20,5 @@ awk
 
 
 BUGS
-I'm not sure how something this small has bugs in it, but email lonelypyxel@yandex.com or open up a issue on 
+I'm not sure how something this small has bugs in it, but if it does open up a issue on 
 github
