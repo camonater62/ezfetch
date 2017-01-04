@@ -64,4 +64,4 @@ Hostname:       $HOST
 Window Manager: $wm
 Shell:          $SHELL"
 
-echo -e "\e[0m ;^)"
+echo -e "\e[0m"
