@@ -48,8 +48,8 @@ Distro:		Arch"
 else
 echo -e "\e[0;31m
 \e[0;31m██████\e[0;35m No Logo Has Been Added
-\e[0;31m██  ██\e[0;35m For This Distro Yet
-\e[0;31m██████\e[0;35m ;(
+\e[0;31m██  ██\e[0;35m For This Distro Yet ;(
+\e[0;31m██████\e[0;35m Perhaps recommend it in the githubs?
 
 Distro:		Unknown
 "
