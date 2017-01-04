@@ -15,9 +15,6 @@ SHELL="$(echo $SHELL)"
 	wm="${wm/\"*}"
     fi
 #output p1
-echo "
-ezfetch v1.2
--------------------------"
 if [ -e "/etc/manjaro-release" ] 
 then
 	echo -e "\e[32m██████████████  ██████
@@ -35,20 +32,19 @@ then
 Distro:		Manjaro"
 else if [ -e "/etc/arch-release" ]
 then
-	echo -e "\e[31m
-██████████████
-██████████████
-████	  ████
-████	  ████
-██████████████
-██████████████
-████      ████
-████	  ████
-████	  ████
-████	  ████
 
-Distro: Arch
-"
+cat <<EOF
+${fc}        /\${rc}
+${fc}       /^^\${rc}
+${fc}      /\   \${rc}
+${fc}     /${rc}  ${sc}  \${rc}
+${sc}    /  (  )  \${rc}
+${sc}   / |  |__\\${rc} 
+${sc}  ///        \\\${rc}
+EOF
+echo -e "
+
+Distro:		Arch"
 else
 echo -e "\e[0;31m
 \e[0;31m██████\e[0;35m No Logo Has Been Added
@@ -57,11 +53,15 @@ echo -e "\e[0;31m
 
 Distro:		Unknown
 "
+
 fi
+fi
+
 #output p2
+
 echo "Kernel:         $KERNEL
 Hostname:       $HOST
 Window Manager: $wm
 Shell:          $SHELL"
 
-echo -e "\e[0m"
+echo -e "--ezfetch v1.2-- \e[0m"
