@@ -33,19 +33,23 @@ Distro:		Manjaro"
 else if [ -e "/etc/arch-release" ]
 then
 
-cat <<EOF
-${fc}        /\${rc}
-${fc}       /^^\${rc}
-${fc}      /\   \${rc}
-${fc}     /${rc}  ${sc}  \${rc}
-${sc}    /  (  )  \${rc}
-${sc}   / |  |__\\${rc} 
-${sc}  ///        \\\${rc}
-EOF
-echo -e "
+echo -e "\e[0;31m
+
+██████████████
+██████████████
+████	  ████
+████	  ████
+██████████████
+██████████████
+████      ████
+████	  ████
+████	  ████
+████	  ████
 
 Distro:		Arch"
+
 else
+
 echo -e "\e[0;31m
 \e[0;31m██████\e[0;35m No Logo Has Been Added
 \e[0;31m██  ██\e[0;35m For This Distro Yet ;(
