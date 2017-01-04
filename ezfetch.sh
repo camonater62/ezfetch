@@ -1,6 +1,7 @@
 #! /bin/sh
 #ezfetch - the lightest and simplest *fetch out there.
 #oh- and look how easy it is to configure!
+#created by LonelyPyxel and modified by camonater62
 #vars
 HOST="$(hostname)"
 KERNEL="$(uname -mrs)"
@@ -16,20 +17,34 @@ SHELL="$(echo $SHELL)"
 
 #output
 echo "
-ezfetch v1.0
+ezfetch v1.1
 -------------------------
 $OS
 Kernel:         $KERNEL
 Hostname:       $HOST
 Window Manager: $wm
-Shell:          $SHELL
- ___________________
-|  _______________  |
-| |  ___________  | |
-| | |  _______  | | |
-| | | |_______| | | |
-| | |___________| | |
-| |_______________| |
-|___________________|
-"             
-echo -e " \033[1;37m██\033[0;30m██\033[0;34m██\033[1;34m██\033[0;32m██\033[1;32m██\033[0;36m██\033[1;36m██\033[0;31m██\033[1;31m██\033[0;35m██\033[1;35m██\033[0;33m██\033[1;33m██\033[1;30m██\033[0;37m██"
+Shell:          $SHELL"
+if [ -e "/etc/manjaro-release" ] 
+then
+	echo -e "\e[32m
+██████████████  ██████
+██████████████  ██████
+██████████████  ██████
+██████		██████
+██████  ██████  ██████
+██████  ██████  ██████
+	██████  ██████
+██████  ██████  ██████
+██████  ██████  ██████
+██████  ██████  ██████
+██████  ██████  ██████
+	"
+else
+	echo -e "\e[0;31m
+\e[0;31m██████\e[0;35m No Logo Has Been Added
+\e[0;31m██  ██\e[0;35m For This Distro Yet
+\e[0;31m██████\e[0;35m ;(
+	"
+fi
+
+echo -e "\e[0m"
