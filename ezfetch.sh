@@ -33,8 +33,7 @@ Distro:		Manjaro"
 else if [ -e "/etc/arch-release" ]
 then
 
-echo -e "\e[0;34m
-	 ██
+echo -e "\e[0;34m	 ██
 	████
        ██████
 	 █████
@@ -47,8 +46,7 @@ Distro:		Arch"
 
 else
 
-echo -e "\e[0;31m
-\e[0;31m██████\e[0;35m No Logo Has Been Added
+echo -e "\e[0;31m██████\e[0;35m No Logo Has Been Added
 \e[0;31m██  ██\e[0;35m For This Distro Yet ;(
 \e[0;31m██████\e[0;35m Perhaps recommend it in the githubs?
 
