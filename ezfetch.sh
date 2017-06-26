@@ -16,15 +16,14 @@ SHELL="$(echo $SHELL)"
     fi
 #output p1
 
-echo -e "
-   ██████  ██████
+echo -e "   ██████  ██████
    ██      ██
    ████    ████
    ██      ██
    ██████  ██
 $OS
-Kernel:     $KERNEL
-Host:       $HOST
-WM:         $wm
-Shell:      $SHELL"
+Kernel:         $KERNEL
+Host:           $HOST
+WM:             $wm
+Shell:          $SHELL"
 echo -e "--ezfetch v1.2-- \e[0m"
