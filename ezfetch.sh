@@ -16,11 +16,11 @@ SHELL="$(echo $SHELL)"
     fi
 #output p1
 
-echo -e "   ██████  ██████
-   ██      ██
-   ████    ████
-   ██      ██
-   ██████  ██
+echo -e "      ██████  ██████
+      ██      ██
+      ████    ████
+      ██      ██
+      ██████  ██
 $OS
 Kernel:         $KERNEL
 Host:           $HOST
