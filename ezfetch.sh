@@ -26,4 +26,4 @@ Kernel:         $KERNEL
 Host:           $HOST
 WM:             $wm
 Shell:          $SHELL"
-echo -e "--ezfetch v1.2-- \e[0m"
+echo -e "     --ezfetch v1.2-- \e[0m"
