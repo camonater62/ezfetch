@@ -2,22 +2,16 @@ EZFetch is an incredbily simple infogathering script for screenshots on your UNI
 
 INSTALLATION
 git clone https://www.github.com/camonater62/ezfetch.git
-cd ezfetch
-chmod +x ezfetch.sh
-sudo cp ezfetch.sh /usr/bin
-
-
+./install.sh
 
 USAGE
 ezfetch.sh
-
 
 DEPENDENCIES
 uname
 lsb_release
 xprop
 awk
-
 
 BUGS
 I'm not sure how something this small has bugs in it, but if it does open up a issue on 
