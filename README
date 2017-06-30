@@ -1,10 +1,10 @@
 EZFetch is an incredbily simple infogathering script for screenshots on your UNIX system!
 
 INSTALLATION
-git clone https://www.github.com/camonater62/ezfetch.git
+git clone https://github.com/camonater62/ezfetch
 cd ezfetch
-chmod +x ezfetch.sh
-sudo cp ezfetch.sh /usr/bin
+chmod +x ezfetch (might not be needed)
+sudo cp ezfetch /usr/bin
 
 USAGE
 ezfetch.sh
