@@ -6,12 +6,12 @@ HOST="$(hostname)" #Gets Hostname
 KERNEL="$(uname -mrs)" #Gets Kernel
 SHELL="$(ls -l /proc/$$/exe | sed 's%.*/%%')" #Gets Shell
     if [ -n "$DISPLAY" ]; then #Credit to Mitya on IRC for this func.			# Gets the window Manager
-	id="$(xprop -root -notype | \awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}')" 	# ^
-	wm="$(xprop -id "$id" -notype -f _NET_WM_NAME 8t)"				# ^
-	wm="${wm/*_NET_WM_NAME = }"							# ^
-	wm="${wm/\"}"									# ^
-	wm="${wm/\"*}" 									# ^
-fi											# ^
+	id="$(xprop -root -notype | \awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}')" 
+	wm="$(xprop -id "$id" -notype -f _NET_WM_NAME 8t)"
+	wm="${wm/*_NET_WM_NAME = }"
+	wm="${wm/\"}"
+	wm="${wm/\"*}"
+fi
 
 #source: https://unix.stackexchange.com/questions/6345/how-can-i-get-distribution-name-and-version-number-in-a-simple-shell-script
 OS=$(awk '/DISTRIB_ID=/' /etc/*-release | sed 's/DISTRIB_ID=//' | tr '[:upper:]' '[:lower:]') # Gets the distro
@@ -29,11 +29,11 @@ if [ -z "$VERSION" ]; then
 fi
 
 if [ "$XDG_CURRENT_DESKTOP" = "" ]						# Gets DE
-then										# ^
-  desktop=$(echo "$XDG_DATA_DIRS" | sed 's/.*\(xfce\|kde\|gnome\).*/\1/')	# ^
-else										# ^
-  desktop=$XDG_CURRENT_DESKTOP							# ^
-fi										# ^
+then
+  desktop=$(echo "$XDG_DATA_DIRS" | sed 's/.*\(xfce\|kde\|gnome\).*/\1/')
+else
+  desktop=$XDG_CURRENT_DESKTOP
+fi
 
 desktop=${desktop,,}  # convert to lower case
 
