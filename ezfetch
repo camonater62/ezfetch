@@ -1,22 +1,23 @@
 #! /bin/sh
-#ezfetch - the lightest and simplest *fetch out there.
-#oh- and look how easy it is to configure!
-#created by LonelyPyxel and modified by camonater62
-#vars
-HOST="$(hostname)"
-KERNEL="$(uname -mrs)"
-SHELL="$(ls -l /proc/$$/exe | sed 's%.*/%%')"
-    if [ -n "$DISPLAY" ]; then #Credit to Mitya on IRC for this func.
-	id="$(xprop -root -notype | \awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}')" 
-	wm="$(xprop -id "$id" -notype -f _NET_WM_NAME 8t)"
-	wm="${wm/*_NET_WM_NAME = }"
-	wm="${wm/\"}"
-	wm="${wm/\"*}"
-    fi
+# ezfetch - the lightest and simplest *fetch out there.
+# oh- and look how easy it is to configure!
+# created by LonelyPyxel and modified by camonater62
+
+HOST="$(hostname)" #Gets Hostname
+KERNEL="$(uname -mrs)" #Gets Kernel
+SHELL="$(ls -l /proc/$$/exe | sed 's%.*/%%')" #Gets Shell
+    if [ -n "$DISPLAY" ]; then #Credit to Mitya on IRC for this func.			# Gets the window Manager
+	id="$(xprop -root -notype | \awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}')" 	# ^
+	wm="$(xprop -id "$id" -notype -f _NET_WM_NAME 8t)"				# ^
+	wm="${wm/*_NET_WM_NAME = }"							# ^
+	wm="${wm/\"}"									# ^
+	wm="${wm/\"*}" 									# ^
+fi											# ^
+
 #source: https://unix.stackexchange.com/questions/6345/how-can-i-get-distribution-name-and-version-number-in-a-simple-shell-script
-OS=$(awk '/DISTRIB_ID=/' /etc/*-release | sed 's/DISTRIB_ID=//' | tr '[:upper:]' '[:lower:]')
-ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
-VERSION=$(awk '/DISTRIB_RELEASE=/' /etc/*-release | sed 's/DISTRIB_RELEASE=//' | sed 's/[.]0/./')
+OS=$(awk '/DISTRIB_ID=/' /etc/*-release | sed 's/DISTRIB_ID=//' | tr '[:upper:]' '[:lower:]') # Gets the distro
+ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/') # Gets the bit version of the distro
+VERSION=$(awk '/DISTRIB_RELEASE=/' /etc/*-release | sed 's/DISTRIB_RELEASE=//' | sed 's/[.]0/./') # Gets version release date
 
 if [ -z "$OS" ]; then
     OS=$(awk '{print $1}' /etc/*-release | tr '[:upper:]' '[:lower:]')
@@ -26,18 +27,18 @@ if [ -z "$VERSION" ]; then
     VERSION=$(awk '{print $3}' /etc/*-release)
 fi
 
-#Check DE
-if [ "$XDG_CURRENT_DESKTOP" = "" ]
-then
-  desktop=$(echo "$XDG_DATA_DIRS" | sed 's/.*\(xfce\|kde\|gnome\).*/\1/')
-else
-  desktop=$XDG_CURRENT_DESKTOP
-fi
+if [ "$XDG_CURRENT_DESKTOP" = "" ]						# Gets DE
+then										# ^
+  desktop=$(echo "$XDG_DATA_DIRS" | sed 's/.*\(xfce\|kde\|gnome\).*/\1/')	# ^
+else										# ^
+  desktop=$XDG_CURRENT_DESKTOP							# ^
+fi										# ^
 
 desktop=${desktop,,}  # convert to lower case
 
 NC='\e[0m' # No Color
 
+# Here's where it displays everything!
 echo -e " E \033[1;37m██\033[0;30m██ ${NC}Distro:         $OS
  Z \033[0;34m██\033[1;34m██ ${NC}Bit:            $ARCH
  F \033[0;32m██\033[1;32m██ ${NC}Release:        $VERSION
