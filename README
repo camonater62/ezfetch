@@ -5,12 +5,12 @@ git clone https://github.com/camonater62/ezfetch
 
 USAGE
 cd ezfetch
-chmod +x ezfetch*
+chmod +x ezfetch  *
 ./ezfetch
 
 INSTALLATION
 cd ezfetch
-chmod +x ezfetch*
+chmod +x ezfetch  *
 sudo cp ezfetch /usr/bin
 
 USAGE
