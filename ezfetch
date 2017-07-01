@@ -1,6 +1,5 @@
 #! /bin/sh
 # ezfetch - the lightest and simplest *fetch out there.
-# oh- and look how easy it is to configure!
 # created by LonelyPyxel and modified by camonater62
 
 HOST="$(hostname)" #Gets Hostname
