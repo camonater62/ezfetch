@@ -20,6 +20,8 @@ DEPENDENCIES
 uname
 xprop
 awk
+sed
+free
 
 BUGS
 I'm not sure how something this small has bugs in it, but if it does open up a issue on 
