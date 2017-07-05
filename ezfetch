@@ -85,8 +85,7 @@ echo -e " E \033[1;37m██\033[0;30m██ ${NC}Distro:         $OS $ARCH bit
  T \033[0;31m██\033[1;31m██ ${NC}WM / DE:        $wm / $desktop
  C \033[0;35m██\033[1;35m██ ${NC}Shell:          $SHELL
  H \033[0;33m██\033[1;33m██ ${NC}CPU:           $CPU
-1.5\033[1;30m██\033[0;37m██ ${NC}Ram:            $RAM
-${NC}"
+1.5\033[1;30m██\033[0;37m██ ${NC}Ram:            $RAM${NC}"
 exit 0
 fi
 
