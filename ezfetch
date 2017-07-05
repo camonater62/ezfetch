@@ -1,9 +1,8 @@
 #! /bin/sh
-#ezfetch-light v2cl
-#the lightestest and simplestest *fetch out there.
+#ezfetch-light v2cl - the lightestest and simplestest *fetch out there.
 
-echo 'ezfetch v2cl'
+echo '   --ezfetch-light v2--'
 lsb_release -d
-printf "Kernel: "; uname -mrs
-printf "Host: "; hostname
-printf "Shell: "; echo $SHELL
+printf "Kernel:         "; uname -mrs
+printf "Host:           "; hostname
+printf "Shell:          "; echo $SHELL
