@@ -4,7 +4,8 @@ WARNING
 does not work propery on:
 -fedora(/redhat?)
 -bash on ubuntu on windows (the built in bash on windows)
--maye others
+-OSX
+-maybe others
 
 DOWNLOAD
 git clone https://github.com/camonater62/ezfetch
