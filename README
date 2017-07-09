@@ -1,37 +1,36 @@
 EZFetch is an simple infogathering script for screenshots on your UNIX system!
+Forked from https://github.com/lonelypyxel/ezfetch
+
+There are four versions of ezfetch
+you can find each of these in the different branches of this repository
+The following applies only to this branch:
+
+This branch is the light version that is also largely based of lonelypyxel's version in terms of design
+this version has no(?) compatability issues and is by far the most simple
+the light branch is recommend for really low spec pc's and for more compatability
 
 WARNING
 does not work propery on:
--fedora(/redhat?)
--bash on ubuntu on windows (the built in bash on windows)
--OSX
--maybe others
+-so far none
 
 DOWNLOAD
-git clone https://github.com/camonater62/ezfetch
+git clone -b light https://github.com/camonater62/ezfetch
 
 USAGE
 cd ezfetch
-chmod +x ezfetch  *
+chmod +x ezfetch
 ./ezfetch
 
-INSTALLATION
+INSTALLATION (optional)
 cd ezfetch
-chmod +x ezfetch  *
+chmod +x ezfetch
 sudo cp ezfetch /usr/bin
-
-USAGE
-ezfetch.sh
+  USAGE
+  ezfetch
 
 DEPENDENCIES
 uname
-xprop
-awk
-sed
-free
+lsb_release
 
 BUGS
-I'm not sure how something this small has bugs in it, but if it does open up a issue on 
-github
-
-*might not be needed
+I'm not sure how something this small has bugs in it, but if it does open up a issue on github
