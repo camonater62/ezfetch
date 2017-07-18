@@ -8,7 +8,7 @@ does not work propery on:
 -maybe others
 
 DOWNLOAD
-git clone https://github.com/camonater62/ezfetch
+git clone -b compact https://github.com/camonater62/ezfetch
 
 USAGE
 cd ezfetch
