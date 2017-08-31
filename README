@@ -3,7 +3,6 @@ EZFetch is an simple infogathering script for screenshots on your UNIX system!
 WARNING
 does not work propery on:
 -fedora(/redhat?)
--bash on ubuntu on windows (the built in bash on windows)
 -OSX
 -maybe others
 
@@ -12,12 +11,12 @@ git clone -b compact https://github.com/camonater62/ezfetch
 
 USAGE
 cd ezfetch
-chmod +x ezfetch  *
+chmod +x ezfetch
 ./ezfetch
 
 INSTALLATION
 cd ezfetch
-chmod +x ezfetch  *
+chmod +x ezfetch
 sudo cp ezfetch /usr/bin
 
 USAGE
@@ -33,5 +32,3 @@ free
 BUGS
 I'm not sure how something this small has bugs in it, but if it does open up a issue on 
 github
-
-*might not be needed
