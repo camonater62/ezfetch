@@ -35,9 +35,7 @@ else
   desktop=$XDG_CURRENT_DESKTOP
 fi
 
-desktop=${desktop,,}  # convert to lower case
-
-NC='\e[0m' # No Color
+NC='\033[0m' # No Color
 
 # Here's where it displays everything!
 echo -e " E \033[1;37m██\033[0;30m██ ${NC}Distro:         $OS $ARCH bit
