@@ -45,7 +45,11 @@ RAM=$(free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }')
 CPU=$(awk 'BEGIN{FS=":"} /model name/ { print $2; exit }' /proc/cpuinfo | awk 'BEGIN{FS=" @"; OFS="\n"} { print $1; exit }' | cut -c 2-)
 
 # GPU Model
-GPU=$(lspci -mm | awk -F '\\"|\\" \\"|\\(' '/"Display|"3D|"VGA/ {a[$0] = $3 " " $4} END{for(i in a) {if(!seen[a[i]]++) print a[i]}}')
+if [ "$(lshw | grep display)" = "" ]; then
+  GPU="N/A"
+else
+  GPU=$(lspci -mm | awk -F '\\"|\\" \\"|\\(' '/"Display|"3D|"VGA/ {a[$0] = $3 " " $4} END{for(i in a) {if(!seen[a[i]]++) print a[i]}}')
+fi
 
 # Desktop Environment
 if [ "$XDG_CURRENT_DESKTOP" = "" ]; then
