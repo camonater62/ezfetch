@@ -1,6 +1,6 @@
 ![Screenshot](https://i.imgur.com/vnDYePp.png)
 
-EZFetch is an simple infogathering script for screenshots on your UNIX system!
+#### *EZFetch is an simple infogathering script for screenshots on your UNIX system!*
 
 ## DOWNLOAD
 git clone -b compact https://github.com/camonater62/ezfetch
