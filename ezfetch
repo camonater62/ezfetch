@@ -1,5 +1,5 @@
 #! /bin/sh
-# ezfetch - the lightest and simplest *fetch out there.
+# ezfetch - the lightest and simplest fetch out there.
 # this version is modified by camonater62
 
 # Hostname
@@ -13,50 +13,38 @@ SHELL="$(echo $SHELL | cut -c 6-)"
 
 # Window Manager
 if [ -n "$DISPLAY" ]; then
-  id="$(xprop -root -notype | \awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}')" 
-  WM="$(xprop -id "$id" -notype -f _NET_WM_NAME 8t)"
-  WM="${wm/*_NET_WM_NAME = }"
-  WM="${wm/\"}"
-  WM="${wm/\"*}"
+  ID="$(xprop -root -notype _NET_SUPPORTING_WM_CHECK)"
+  ID="$(echo $ID | cut -c 39-)"
+  WM="$(xprop -id "$ID" -notype -len 100 -f _NET_WM_NAME 8t | grep "WM_NAME = " | cut -c 17- | rev | cut -c 2- | rev | tr -d '\n')"
 fi
 if [ "$WM" = "" ]; then
   WM="N/A"
 fi
 
 # Distro
-OS=$(awk '/DISTRIB_ID=/' /etc/*-release | sed 's/DISTRIB_ID=//' | tr '[:upper:]' '[:lower:]')
-if [ -z "$OS" ]; then
-  OS=$(awk '{print $1}' /etc/*-release | tr '[:upper:]' '[:lower:]')
-fi
+OS=$(lsbrelease -si)
 
 # Distro Arch
-ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
+ARCH=$(uname -m | sed 's/x86//;s/i[3-6]86/32/')
 
 # Distro Version
-VERSION=$(awk '/DISTRIB_RELEASE=/' /etc/*-release | sed 's/DISTRIB_RELEASE=//' | sed 's/[.]0/./')
-if [ -z "$VERSION" ]; then
-  VERSION=$(awk '{print $3}' /etc/*-release)
-fi
+VERSION=$(lsb_release -sr)
 
 # Ram & Current Usage
-RAM=$(free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }')
+RAM=$(free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)\n", $3,$2,$3100/$2 }')
 
 # CPU Model
 CPU=$(awk 'BEGIN{FS=":"} /model name/ { print $2; exit }' /proc/cpuinfo | awk 'BEGIN{FS=" @"; OFS="\n"} { print $1; exit }' | cut -c 2-)
 
 # GPU Model
-if [ "$(lshw | grep display)" = "" ]; then
-  GPU="N/A"
-else
-  GPU=$(lspci -mm | awk -F '\\"|\\" \\"|\\(' '/"Display|"3D|"VGA/ {a[$0] = $3 " " $4} END{for(i in a) {if(!seen[a[i]]++) print a[i]}}')
-fi
+GPU=$(lspci -mm | awk -F '\"|\" \"|\(' '/"Display|"3D|"VGA/ {a[$0] = $3 " " $4} END{for(i in a) {if(!seen[a[i]]++) print a[i]}}')
 
 # Desktop Environment
 if [ "$XDG_CURRENT_DESKTOP" = "" ]; then
   if [ "$XDG_DATA_DIRS" = "/usr/local/share:/usr/share:/var/lib/snapd/desktop" ]; then
     DESKTOP=""
   else
-    DESKTOP=$(echo "$XDG_DATA_DIRS" | sed 's/.*\(xfce\|kde\|gnome\).*/\1/')
+    DESKTOP=$(echo "$XDG_DATA_DIRS" | sed 's/.(xfce|kde|gnome)./\1/')
   fi
 else
   DESKTOP=$XDG_CURRENT_DESKTOP
@@ -70,7 +58,7 @@ NC='\033[0m'
 
 # Here's where it displays everything!
 echo " E \033[1;37m██\033[0;30m██ ${NC}Distro:         $OS $VERSION $ARCH bit
- Z \033[0;34m██\033[1;34m██ ${NC}Kernel:         $KERNEL         
+ Z \033[0;34m██\033[1;34m██ ${NC}Kernel:         $KERNEL
  F \033[0;32m██\033[1;32m██ ${NC}Host:           $HOST
  E \033[0;36m██\033[1;36m██ ${NC}WM / DE:        $WM / $DESKTOP
  T \033[0;31m██\033[1;31m██ ${NC}Shell:          $SHELL
