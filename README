@@ -2,14 +2,12 @@ EZFetch is an simple infogathering script for screenshots on your UNIX system!
 
 WARNING
 does not work propery on:
--fedora(/redhat?)
--OSX
--maybe others
+- Let me know!
 
 DOWNLOAD
 git clone -b compact https://github.com/camonater62/ezfetch
 
-USAGE
+USAGE w/o INSTALL
 cd ezfetch
 chmod +x ezfetch
 ./ezfetch
@@ -20,15 +18,11 @@ chmod +x ezfetch
 sudo cp ezfetch /usr/bin
 
 USAGE
-ezfetch.sh
+ezfetch
 
 DEPENDENCIES
 uname
+lsb_release
 xprop
-awk
-sed
 free
-
-BUGS
-I'm not sure how something this small has bugs in it, but if it does open up a issue on 
-github
+lspci
