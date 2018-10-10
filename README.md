@@ -3,7 +3,7 @@
 #### *EZFetch is an simple infogathering script for screenshots on your UNIX system!*
 
 ## DOWNLOAD
-git clone -b compact https://github.com/camonater62/ezfetch
+git clone https://github.com/camonater62/ezfetch
 
 ## USAGE w/o INSTALL
 cd ezfetch
