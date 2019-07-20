@@ -1,15 +1,29 @@
-#! /bin/sh
+#! /bin/bash
 # ezfetch - the lightest and simplest fetch out there.
-# this version is modified by camonater62
+# c4m00 edit
 
-# Hostname
-HOST="$(hostname)"
+# User + Host
+HOST="$USER@$(hostname)"
+
+# Colors
+COLORS=("\e[31m" "\e[32m" "\e[33m" "\e[34m" "\e[35m" "\e[36m")
+COLOR=${COLORS[$(($RANDOM % 6))]}
+NUMBLOCKS=$(( $(expr length $HOST) / $(expr length $COLORS) ))
+for ((i = 0; i < $(expr length $COLORS); i++)); do
+	BLOCKS=""
+	for ((j = 0; j < $NUMBLOCKS; j++)); do
+		BLOCKS="${BLOCKS}█"
+	done
+	ALLCOLORS="${ALLCOLORS}${COLORS[i]}${BLOCKS}"
+done
+
+# Bar at the top
+for ((i = 0; i < $(expr length $HOST); i++)); do
+	TOPBAR="$TOPBAR-"
+done
 
 # Kernel
-KERNEL="$(uname -mrs)"
-
-# Shell
-SHELL="$(echo $SHELL | cut -c 6-)"
+KERNEL="$(uname -rs)"
 
 # Window Manager
 if [ -n "$DISPLAY" ]; then
@@ -22,46 +36,46 @@ if [ "$WM" = "" ]; then
 fi
 
 # Distro
-OS=$(lsb_release -si)
-
-# Distro Arch
-ARCH=$(uname -m | sed 's/x86//;s/i[3-6]86/32/')
-
-# Distro Version
-VERSION=$(lsb_release -sr)
+OS=$(lsb_release -sd)
 
 # Ram & Current Usage
-RAM=$(free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)\n", $3,$2,$3100/$2 }')
+RAM=$(free -m | awk 'NR==2{printf "%s/%sMB (%.1f%%)\n", $3, $2, ((100*$3/$2)) }')
 
 # CPU Model
 CPU=$(awk 'BEGIN{FS=":"} /model name/ { print $2; exit }' /proc/cpuinfo | awk 'BEGIN{FS=" @"; OFS="\n"} { print $1; exit }' | cut -c 2-)
 
 # GPU Model
-GPU=$(lspci -mm | awk -F '\"|\" \"|\(' '/"Display|"3D|"VGA/ {a[$0] = $3 " " $4} END{for(i in a) {if(!seen[a[i]]++) print a[i]}}')
+GPU=$(glxinfo -B | awk '/Device/ {print "%s %s %s", $4, $5, $6}' )
+if [ "$GPU" = "" ]; then
+	GPU="N/A"
+fi
 
 # Desktop Environment
 if [ "$XDG_CURRENT_DESKTOP" = "" ]; then
   if [ "$XDG_DATA_DIRS" = "/usr/local/share:/usr/share:/var/lib/snapd/desktop" ]; then
-    DESKTOP=""
+    DE=""
   else
-    DESKTOP=$(echo "$XDG_DATA_DIRS" | sed 's/.(xfce|kde|gnome)./\1/')
+    DE=$(echo "$XDG_DATA_DIRS" | sed 's/.(xfce|kde|gnome)./\1/')
   fi
 else
-  DESKTOP=$XDG_CURRENT_DESKTOP
+  DE=$XDG_CURRENT_DESKTOP
 fi
-if [ "$DESKTOP" = "" ]; then
-  DESKTOP="N/A"
+if [ "$DE" = "" ]; then
+  DE="N/A"
 fi
 
 # No Color
 NC='\033[0m'
 
 # Here's where it displays everything!
-echo " E \033[1;37m██\033[0;30m██ ${NC}Distro:         $OS $VERSION $ARCH bit
- Z \033[0;34m██\033[1;34m██ ${NC}Kernel:         $KERNEL
- F \033[0;32m██\033[1;32m██ ${NC}Host:           $HOST
- E \033[0;36m██\033[1;36m██ ${NC}WM / DE:        $WM / $DESKTOP
- T \033[0;31m██\033[1;31m██ ${NC}Shell:          $SHELL
- C \033[0;35m██\033[1;35m██ ${NC}CPU:            $CPU
- H \033[0;33m██\033[1;33m██ ${NC}GPU:            $GPU
-1.7\033[1;30m██\033[0;37m██ ${NC}Ram:            $RAM"
+echo -e "${COLOR}$HOST
+${NC}$TOPBAR
+${COLOR}OS${NC}: $OS
+${COLOR}Kernel${NC}: $KERNEL
+${COLOR}WM${NC}: $WM
+${COLOR}DE${NC}: $DE
+${COLOR}Shell${NC}: $SHELL
+${COLOR}CPU${NC}: $CPU
+${COLOR}GPU${NC}: $GPU
+${COLOR}Ram${NC}: $RAM
+${ALLCOLORS}${NC}"
