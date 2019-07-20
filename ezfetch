@@ -20,6 +20,7 @@ done
 if [ "$1" = "-c" ]; then
 	COLOR=${COLORS[$(($2 % $COLORSLENGTH))]};
 fi
+NC='\033[0m'
 
 # Bar at the top
 for ((i = 0; i < $(expr length $HOST); i++)); do
@@ -70,9 +71,6 @@ fi
 if [ "$DE" = "" ]; then
   DE="N/A"
 fi
-
-# No Color
-NC='\033[0m'
 
 # Here's where it displays everything!
 echo -e "${COLOR}$HOST
