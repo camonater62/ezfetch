@@ -7,8 +7,9 @@ HOST="$USER@$(hostname)"
 
 # Colors
 COLORS=("\e[31m" "\e[32m" "\e[33m" "\e[34m" "\e[35m" "\e[36m")
-COLOR=${COLORS[$(($RANDOM % 6))]}
-NUMBLOCKS=$(( $(expr length $HOST) / $(expr length $COLORS) ))
+COLORSLENGTH=$(expr length $COLORS)
+COLOR=${COLORS[5]}
+NUMBLOCKS=$(( $(expr length $HOST) / COLORSLENGTH ))
 for ((i = 0; i < $(expr length $COLORS); i++)); do
 	BLOCKS=""
 	for ((j = 0; j < $NUMBLOCKS; j++)); do
@@ -16,6 +17,9 @@ for ((i = 0; i < $(expr length $COLORS); i++)); do
 	done
 	ALLCOLORS="${ALLCOLORS}${COLORS[i]}${BLOCKS}"
 done
+if [ "$1" = "-c" ]; then
+	COLOR=${COLORS[$(($2 % $COLORSLENGTH))]};
+fi
 
 # Bar at the top
 for ((i = 0; i < $(expr length $HOST); i++)); do
@@ -35,6 +39,9 @@ if [ "$WM" = "" ]; then
   WM="N/A"
 fi
 
+# Uptime
+UPTIME=$(uptime -p | cut -c 4-)
+
 # Distro
 OS=$(lsb_release -sd)
 
@@ -45,7 +52,7 @@ RAM=$(free -m | awk 'NR==2{printf "%s/%sMB (%.1f%%)\n", $3, $2, ((100*$3/$2)) }'
 CPU=$(awk 'BEGIN{FS=":"} /model name/ { print $2; exit }' /proc/cpuinfo | awk 'BEGIN{FS=" @"; OFS="\n"} { print $1; exit }' | cut -c 2-)
 
 # GPU Model
-GPU=$(glxinfo -B | awk '/Device/ {print "%s %s %s", $4, $5, $6}' )
+GPU=$(glxinfo -B | awk '/Device/ {print "%s %s %s", $4, $5, $6} /OpenGL renderer string:/ {printf "%s %s %s", $4, $5, $6} /OpenGL vendor string:/ {printf "%s ", $4}' )
 if [ "$GPU" = "" ]; then
 	GPU="N/A"
 fi
@@ -55,7 +62,7 @@ if [ "$XDG_CURRENT_DESKTOP" = "" ]; then
   if [ "$XDG_DATA_DIRS" = "/usr/local/share:/usr/share:/var/lib/snapd/desktop" ]; then
     DE=""
   else
-    DE=$(echo "$XDG_DATA_DIRS" | sed 's/.(xfce|kde|gnome)./\1/')
+    DE=$(echo "$XDG_DATA_DIRS" | sed 's/.(xfce|kde|gnome)./')
   fi
 else
   DE=$XDG_CURRENT_DESKTOP
@@ -72,10 +79,12 @@ echo -e "${COLOR}$HOST
 ${NC}$TOPBAR
 ${COLOR}OS${NC}: $OS
 ${COLOR}Kernel${NC}: $KERNEL
+${COLOR}Uptime${NC}: $UPTIME
 ${COLOR}WM${NC}: $WM
 ${COLOR}DE${NC}: $DE
 ${COLOR}Shell${NC}: $SHELL
 ${COLOR}CPU${NC}: $CPU
 ${COLOR}GPU${NC}: $GPU
 ${COLOR}Ram${NC}: $RAM
+
 ${ALLCOLORS}${NC}"
