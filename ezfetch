@@ -44,7 +44,7 @@ fi
 UPTIME=$(uptime -p | cut -c 4-)
 
 # Distro
-OS=$(lsb_release -sd)
+OS=$(lsb_release -sd | sed 's/"//g')
 
 # Ram & Current Usage
 RAM=$(free -m | awk 'NR==2{printf "%s/%sMB (%.1f%%)\n", $3, $2, ((100*$3/$2)) }')
